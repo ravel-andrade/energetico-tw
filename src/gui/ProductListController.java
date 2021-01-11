@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import gui.listeners.DataChangeListener;
 import application.Main;
 import gui.util.Alerts;
 import gui.util.Utils;
@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import model.entities.Product;
 import model.services.ProductService;
 
-public class ProductListController implements Initializable {
+public class ProductListController implements Initializable, DataChangeListener {
 
 	private ProductService service;
 	
@@ -90,6 +90,7 @@ public class ProductListController implements Initializable {
 			ProductFormController controller = loader.getController();
 			controller.setProduct(obj);
 			controller.setProductService(new ProductService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
@@ -105,4 +106,8 @@ public class ProductListController implements Initializable {
 		}
 	}
 	
+		@Override
+		public void onDataChanged() {
+			updateTableView();
+		}
 }
