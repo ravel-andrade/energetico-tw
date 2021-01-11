@@ -1,17 +1,17 @@
 package model.services;
 
-import java.util.ArrayList;
+import model.dao.DaoFactory;
+import model.dao.SaleDao;
 import java.util.List;
 
 import model.entities.Sale;
 
 public class SaleService {
+	
+	private SaleDao dao = DaoFactory.createSaleDao();
 
 	public List<Sale> findAll() {
-		List<Sale> list = new ArrayList<>();
-		list.add(new Sale(1, "Books"));
-		list.add(new Sale(2, "Computers"));
-		list.add(new Sale(3, "Electronics"));
-		return list;
+		
+		return dao.findAll();
 	}
 }

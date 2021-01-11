@@ -1,6 +1,8 @@
+
 package model.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Sale implements Serializable {
 
@@ -8,13 +10,25 @@ public class Sale implements Serializable {
 
 	private Integer id;
 	private String name;
+	private Double taxICMS;
+	private Double taxIPI;
+	private Double taxPIS;
+	private Double taxCOFINS;
+	private Product product;
+	
+
+	private Sale Sale;
 
 	public Sale() {
 	}
 
-	public Sale(Integer id, String name) {
+	public Sale(Integer id, String name, Product product) {
 		this.id = id;
 		this.name = name;
+		this.taxICMS = product.getValue() * 0.18;
+		this.taxIPI = product.getValue() * 0.04;
+		this.taxPIS = product.getValue() * 0.0186;
+		this.taxCOFINS = product.getValue() * 0.0854;
 	}
 
 	public Integer getId() {
@@ -33,11 +47,66 @@ public class Sale implements Serializable {
 		this.name = name;
 	}
 
+	public Double getTaxICMS() {
+		return taxICMS;
+	}
+
+	public void setTaxICMS(Double taxICMS) {
+		this.taxICMS = taxICMS;
+	}
+
+	public Double getTaxIPI() {
+		return taxIPI;
+	}
+
+	public void setTaxIPI(Double taxIPI) {
+		this.taxIPI = taxIPI;
+	}
+
+	public Double getTaxPIS() {
+		return taxPIS;
+	}
+
+	public void setTaxPIS(Double taxPIS) {
+		this.taxPIS = taxPIS;
+	}
+
+	public Double getTaxCOFINS() {
+		return taxCOFINS;
+	}
+
+	public void setTaxCOFINS(Double taxCOFINS) {
+		this.taxCOFINS = taxCOFINS;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Sale getSale() {
+		return Sale;
+	}
+
+	public void setSale(Sale sale) {
+		Sale = sale;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((Sale == null) ? 0 : Sale.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((taxCOFINS == null) ? 0 : taxCOFINS.hashCode());
+		result = prime * result + ((taxICMS == null) ? 0 : taxICMS.hashCode());
+		result = prime * result + ((taxIPI == null) ? 0 : taxIPI.hashCode());
+		result = prime * result + ((taxPIS == null) ? 0 : taxPIS.hashCode());
 		return result;
 	}
 
@@ -50,16 +119,54 @@ public class Sale implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Sale other = (Sale) obj;
+		if (Sale == null) {
+			if (other.Sale != null)
+				return false;
+		} else if (!Sale.equals(other.Sale))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
+		if (taxCOFINS == null) {
+			if (other.taxCOFINS != null)
+				return false;
+		} else if (!taxCOFINS.equals(other.taxCOFINS))
+			return false;
+		if (taxICMS == null) {
+			if (other.taxICMS != null)
+				return false;
+		} else if (!taxICMS.equals(other.taxICMS))
+			return false;
+		if (taxIPI == null) {
+			if (other.taxIPI != null)
+				return false;
+		} else if (!taxIPI.equals(other.taxIPI))
+			return false;
+		if (taxPIS == null) {
+			if (other.taxPIS != null)
+				return false;
+		} else if (!taxPIS.equals(other.taxPIS))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Sale [id=" + id + ", name=" + name + "]";
+		return "Sale [id=" + id + ", name=" + name + ", taxICMS=" + taxICMS + ", taxIPI=" + taxIPI + ", taxPIS="
+				+ taxPIS + ", taxCOFINS=" + taxCOFINS + ", product=" + product + ", Sale=" + Sale + "]";
 	}
-} 
+
+	
+}
