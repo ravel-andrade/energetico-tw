@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -17,7 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
+import model.exceptions.ValidationException;
 import model.entities.Product;
 import model.services.ProductService;
 
@@ -75,7 +77,11 @@ public class ProductFormController implements Initializable {
 			service.saveOrUpdate(entity);
 			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
-		} catch (DbException e) {
+		}
+		catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
+		}
+		catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
@@ -83,10 +89,21 @@ public class ProductFormController implements Initializable {
 	private Product getFormData() {
 		Product obj = new Product();
 
+		ValidationException exception = new ValidationException("Validation error");
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+			exception.addError("name", "Campo obrigatório");
+		}
 		obj.setName(txtName.getText());
+		if (txtValue.getText() == null || txtValue.getText().trim().equals("")) {
+			exception.addError("value", "Campo obrigatório");
+		}
 		obj.setValue(Utils.tryParseToDouble(txtValue.getText()));
 
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
+		
 		return obj;
 	}
 
@@ -120,6 +137,18 @@ public class ProductFormController implements Initializable {
 	private void notifyDataChangeListeners() {
 		for (DataChangeListener listener : dataChangeListeners) {
 			listener.onDataChanged();
+		}
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+
+		if (fields.contains("name")) {
+			labelErrorName.setText(errors.get("name"));
+		}
+		
+		if (fields.contains("value")) {
+			labelErrorValue.setText(errors.get("value"));
 		}
 	}
 }
