@@ -51,6 +51,7 @@ public class SaleListController implements Initializable {
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewSale.prefHeightProperty().bind(stage.heightProperty());
