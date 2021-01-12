@@ -17,6 +17,7 @@ public class Sale implements Serializable {
 	private Double taxCOFINS;
 	private Product product;
 	private Double total;
+	private Double discount;
 
 	private Sale Sale;
 
@@ -44,6 +45,14 @@ public class Sale implements Serializable {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+	
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 	
 	public String getName() {

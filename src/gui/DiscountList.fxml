@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="388.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SaleListController">
+<VBox prefHeight="388.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DiscountListController">
    <children>
-      <Label text="Listagem de vendas">
+      <Label text="Listagem de descontos">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -24,17 +24,11 @@
           <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" text="Novo" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableViewSale" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewDiscount" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="tableColumnName" prefWidth="75.0" text="Nome" />
-            <TableColumn fx:id="tableColumnAmount" prefWidth="75.0" text="Quant." />
-            <TableColumn fx:id="tableColumnTaxCOFINS" prefWidth="75.0" text="COFINS" />
-            <TableColumn fx:id="tableColumnTaxICMS" prefWidth="75.0" text="ICMS" />
-            <TableColumn fx:id="tableColumnTaxIPI" prefWidth="75.0" text="IPI" />
-            <TableColumn fx:id="tableColumnTaxPIS" prefWidth="75.0" text="PIS" />
-            <TableColumn fx:id="tableColumnDiscount" prefWidth="75.0" text="Desconto" />
-            <TableColumn fx:id="tableColumnTotal" prefWidth="75.0" text="TOTAL" />
+          <TableColumn fx:id="tableColumnAmount" prefWidth="75.0" text="Quant." />
+            <TableColumn fx:id="tableColumnValue" prefWidth="75.0" text="Valor" />
             <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
             <TableColumn fx:id="tableColumnREMOVE" prefWidth="75.0" />
         </columns>

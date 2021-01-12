@@ -18,6 +18,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import model.services.ProductService;
 import model.services.SaleService;
+import model.services.DiscountService;
 
 public class MainViewController implements Initializable {
 
@@ -29,6 +30,9 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemAbout;
+	
+	@FXML
+	private MenuItem menuItemDiscount;
 
 	@FXML
 	public void onMenuItemSaleAction() {
@@ -46,6 +50,13 @@ public class MainViewController implements Initializable {
 		});
 	}
 
+	@FXML
+	public void onMenuItemDiscountAction() {
+		loadView("/gui/DiscountList.fxml", (DiscountListController controller) -> {
+			controller.setDiscountService(new DiscountService());
+			controller.updateTableView();
+		});
+	}
 
 	@FXML
 	public void onMenuItemAboutAction() {

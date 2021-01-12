@@ -2,6 +2,7 @@ package model.dao;
 import db.DB;
 import model.dao.impl.SaleDaoJDBC;
 import model.dao.impl.ProductDaoJDBC;
+import model.dao.impl.DiscountDaoJDBC;
 
 
 
@@ -14,6 +15,10 @@ import model.dao.impl.ProductDaoJDBC;
 		
 		public static ProductDao createProductDao() {
 			return new ProductDaoJDBC(DB.getConnection());
+		}
+		
+		public static DiscountDao createDiscountDao() {
+			return new DiscountDaoJDBC(DB.getConnection());
 		}
 		
 		

@@ -44,7 +44,13 @@ public class SaleListController implements Initializable, DataChangeListener {
 	private TableColumn<Sale, Integer> tableColumnId;
 	
 	@FXML
+	private TableColumn<Sale, Integer> tableColumnAmount;
+	
+	@FXML
 	private TableColumn<Sale, Double> tableColumnTaxICMS;
+	
+	@FXML
+	private TableColumn<Sale, Double> tableColumnDiscount;
 
 	@FXML
 	private TableColumn<Sale, Double> tableColumnTaxIPI;
@@ -91,6 +97,9 @@ public class SaleListController implements Initializable, DataChangeListener {
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		tableColumnAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+		tableColumnDiscount.setCellValueFactory(new PropertyValueFactory<>("discount"));
+		Utils.formatTableColumnDouble(tableColumnDiscount, 2);
 		tableColumnTaxICMS.setCellValueFactory(new PropertyValueFactory<>("taxICMS"));
 		Utils.formatTableColumnDouble(tableColumnTaxICMS, 2);
 		tableColumnTaxIPI.setCellValueFactory(new PropertyValueFactory<>("taxIPI"));

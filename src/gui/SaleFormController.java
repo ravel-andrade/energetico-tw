@@ -163,6 +163,8 @@ public class SaleFormController implements Initializable {
 		}
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getName());
+		System.out.println(entity.getAmount());
+		txtAmount.setText(String.valueOf(entity.getAmount()));
 		
 		if (entity.getProduct() == null) {
 			comboBoxProduct.getSelectionModel().selectFirst();

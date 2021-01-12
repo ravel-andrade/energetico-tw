@@ -11,37 +11,33 @@ import java.util.List;
 import db.DB;
 import db.DbException;
 import db.DbIntegrityException;
-import model.entities.Sale;
-import model.dao.SaleDao;
+import model.entities.Discount;
+import model.dao.DiscountDao;
 
-public class SaleDaoJDBC implements SaleDao {
+public class DiscountDaoJDBC implements DiscountDao {
 
 	private Connection conn;
 	
-	public SaleDaoJDBC(Connection conn) {
+	public DiscountDaoJDBC(Connection conn) {
 		this.conn = conn;
 	}
 	
 	@Override
-	public Sale findById(Integer id) {
+	public Discount findById(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM sale WHERE Id = ?");
+				"SELECT * FROM discount WHERE Id = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
-				Sale obj = new Sale();
+				Discount obj = new Discount();
 				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setTaxCOFINS(rs.getDouble("TaxCOFINS"));
-				obj.setTaxIPI(rs.getDouble("TaxIPI"));
-				obj.setTaxPIS(rs.getDouble("TaxPIS"));
-				obj.setTaxICMS(rs.getDouble("TaxICMS"));
-				obj.setTotal(rs.getDouble("Total"));
+				obj.setValue(rs.getDouble("Value"));
 				obj.setAmount(rs.getInt("Amount"));
-				obj.setDiscount(rs.getDouble("Discount"));
+				
+				
 				return obj;
 			}
 			return null;
@@ -56,27 +52,21 @@ public class SaleDaoJDBC implements SaleDao {
 	}
 
 	@Override
-	public List<Sale> findAll() {
+	public List<Discount> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM Sale ORDER BY Name");
+				"SELECT * FROM discount ORDER BY Value");
 			rs = st.executeQuery();
 
-			List<Sale> list = new ArrayList<>();
+			List<Discount> list = new ArrayList<>();
 
 			while (rs.next()) {
-				Sale obj = new Sale();
+				Discount obj = new Discount();
 				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setTaxCOFINS(rs.getDouble("TaxCOFINS"));
-				obj.setTaxIPI(rs.getDouble("TaxIPI"));
-				obj.setTaxPIS(rs.getDouble("TaxPIS"));
-				obj.setTaxICMS(rs.getDouble("TaxICMS"));
-				obj.setTotal(rs.getDouble("Total"));
+				obj.setValue(rs.getDouble("Value"));
 				obj.setAmount(rs.getInt("Amount"));
-				obj.setDiscount(rs.getDouble("Discount"));
 				list.add(obj);
 			}
 			return list;
@@ -91,26 +81,20 @@ public class SaleDaoJDBC implements SaleDao {
 	}
 
 	@Override
-	public void insert(Sale obj) {
+	public void insert(Discount obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-				"INSERT INTO Sale " +
-				"(Name, TaxCOFINS, TaxIPI, TaxPIS, TaxICMS, Amount, Total, Discount) " +
+				"INSERT INTO discount " +
+				"(Amount, Value) " +
 				"VALUES " +
-				"(?, ?, ?, ?, ?, ?, ?, ?)", 
+				"(?, ?)", 
 				Statement.RETURN_GENERATED_KEYS);
+
+			st.setDouble(1, obj.getAmount());
+			st.setDouble(2, obj.getValue());
 			
-			st.setString(1, obj.getName());
-			st.setDouble(2, obj.getTaxCOFINS());
-			st.setDouble(3, obj.getTaxIPI());
-			st.setDouble(4, obj.getTaxPIS());
-			st.setDouble(5, obj.getTaxICMS());
-			st.setInt(6, obj.getAmount());
-			st.setDouble(7, obj.getTotal());
-			st.setDouble(8, obj.getDiscount());
-
-
+			
 			int rowsAffected = st.executeUpdate();
 			
 			if (rowsAffected > 0) {
@@ -133,23 +117,17 @@ public class SaleDaoJDBC implements SaleDao {
 	}
 
 	@Override
-	public void update(Sale obj) {
+	public void update(Discount obj) {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"UPDATE Sale " +
-							"SET Name = ?, TaxCOFINS = ?, TaxIPI = ?, TaxPIS = ? , TaxICMS = ?, Amount = ? , Total = ?, Discount = ? " +
+					"UPDATE discount " +
+							"SET Value = ?, Value = ? " +
 							"WHERE Id = ?");
 
-			st.setString(1, obj.getName());
-			st.setDouble(2, obj.getTaxCOFINS());
-			st.setDouble(3, obj.getTaxIPI());
-			st.setDouble(4, obj.getTaxPIS());
-			st.setDouble(5, obj.getTaxICMS());
-			st.setInt(6, obj.getAmount());
-			st.setDouble(7, obj.getTotal());
-			st.setDouble(8, obj.getDiscount());
-			st.setInt(9, obj.getId());
+			st.setDouble(1, obj.getValue());
+			st.setDouble(2, obj.getValue());
+			st.setInt(3, obj.getId());
 
 			st.executeUpdate();
 		}
@@ -166,7 +144,7 @@ public class SaleDaoJDBC implements SaleDao {
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-				"DELETE FROM Sale WHERE Id = ?");
+				"DELETE FROM Discount WHERE Id = ?");
 
 			st.setInt(1, id);
 
