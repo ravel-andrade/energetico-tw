@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.SaleDao;
+import model.entities.Product;
 import model.entities.Sale;
 
 public class SaleService {
@@ -25,5 +26,27 @@ public class SaleService {
 
 	public void remove(Sale obj) {
 		dao.deleteById(obj.getId());
+	}
+	
+	public void setTaxes(Sale sale,Product product) {
+		sale.setProduct(product);
+		sale.setTaxICMS((product.getValue() * 0.18) *sale.getAmount());
+		sale.setTaxIPI((product.getValue() * 0.04) *sale.getAmount());
+		sale.setTaxPIS((product.getValue() * 0.0186) *sale.getAmount());
+		sale.setTaxCOFINS((product.getValue() * 0.0854) *sale.getAmount());
+		sale.setTotal(getTotal(sale, product));
+	}
+	
+	public Double getTotal(Sale sale,Product product) {
+		
+		Double total = (
+				sale.getTaxCOFINS()
+				+sale.getTaxICMS()
+				+sale.getTaxIPI()
+				+sale.getTaxPIS()
+				+(product.getValue()* sale.getAmount() )
+				);
+		
+		return total;
 	}
 }

@@ -99,6 +99,8 @@ public class SaleListController implements Initializable, DataChangeListener {
 		Utils.formatTableColumnDouble(tableColumnTaxPIS, 2);
 		tableColumnTaxCOFINS.setCellValueFactory(new PropertyValueFactory<>("taxCOFINS"));
 		Utils.formatTableColumnDouble(tableColumnTaxCOFINS, 2);
+		tableColumnTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+		Utils.formatTableColumnDouble(tableColumnTotal, 2);
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewSale.prefHeightProperty().bind(stage.heightProperty());

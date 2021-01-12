@@ -34,7 +34,7 @@
             <TableColumn fx:id="tableColumnTaxICMS" prefWidth="75.0" text="ICMS" />
             <TableColumn fx:id="tableColumnTaxIPI" prefWidth="75.0" text="IPI" />
             <TableColumn fx:id="tableColumnTaxPIS" prefWidth="75.0" text="PIS" />
-            <TableColumn prefWidth="75.0" text="TOTAL" />
+            <TableColumn fx:id="tableColumnTotal" prefWidth="75.0" text="TOTAL" />
         </columns>
       </TableView>
    </children>

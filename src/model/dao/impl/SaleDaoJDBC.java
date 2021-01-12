@@ -39,6 +39,7 @@ public class SaleDaoJDBC implements SaleDao {
 				obj.setTaxIPI(rs.getDouble("TaxIPI"));
 				obj.setTaxPIS(rs.getDouble("TaxPIS"));
 				obj.setTaxICMS(rs.getDouble("TaxICMS"));
+				obj.setTotal(rs.getDouble("Total"));
 				return obj;
 			}
 			return null;
@@ -71,6 +72,7 @@ public class SaleDaoJDBC implements SaleDao {
 				obj.setTaxIPI(rs.getDouble("TaxIPI"));
 				obj.setTaxPIS(rs.getDouble("TaxPIS"));
 				obj.setTaxICMS(rs.getDouble("TaxICMS"));
+				obj.setTotal(rs.getDouble("Total"));
 				list.add(obj);
 			}
 			return list;
@@ -90,15 +92,16 @@ public class SaleDaoJDBC implements SaleDao {
 		try {
 			st = conn.prepareStatement(
 				"INSERT INTO Sale " +
-				"(Name, TaxCOFINS, TaxIPI, TaxPIS, TaxICMS) " +
+				"(Name, TaxCOFINS, TaxIPI, TaxPIS, TaxICMS, Total) " +
 				"VALUES " +
-				"(?, ?, ?, ?, ?)", 
+				"(?, ?, ?, ?, ?, ?)", 
 				Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, obj.getName());
 			st.setDouble(2, obj.getTaxCOFINS());
 			st.setDouble(3, obj.getTaxIPI());
 			st.setDouble(4, obj.getTaxPIS());
+			st.setDouble(6, obj.getTotal());
 			st.setDouble(5, obj.getTaxICMS());
 
 
@@ -129,7 +132,7 @@ public class SaleDaoJDBC implements SaleDao {
 		try {
 			st = conn.prepareStatement(
 					"UPDATE Sale " +
-							"SET Name = ?, TaxCOFINS = ?, TaxIPI = ?, TaxPIS = ? , TaxICMS = ? " +
+							"SET Name = ?, TaxCOFINS = ?, TaxIPI = ?, TaxPIS = ? , TaxICMS = ?, Total = ? " +
 							"WHERE Id = ?");
 
 			st.setString(1, obj.getName());
@@ -137,7 +140,8 @@ public class SaleDaoJDBC implements SaleDao {
 			st.setDouble(3, obj.getTaxIPI());
 			st.setDouble(4, obj.getTaxPIS());
 			st.setDouble(5, obj.getTaxICMS());
-			st.setInt(6, obj.getId());
+			st.setDouble(6, obj.getTotal());
+			st.setInt(7, obj.getId());
 
 			st.executeUpdate();
 		}

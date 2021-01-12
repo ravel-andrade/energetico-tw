@@ -16,7 +16,7 @@ public class Sale implements Serializable {
 	private Double taxPIS;
 	private Double taxCOFINS;
 	private Product product;
-	
+	private Double total;
 
 	private Sale Sale;
 
@@ -103,12 +103,14 @@ public class Sale implements Serializable {
 		Sale = sale;
 	}
 	
-	public void setTaxes(Product product) {
-		this.setProduct(product);
-		this.taxICMS = (product.getValue() * 0.18) *this.amount;
-		this.taxIPI = (product.getValue() * 0.04) *this.amount;
-		this.taxPIS = (product.getValue() * 0.0186) *this.amount;
-		this.taxCOFINS = (product.getValue() * 0.0854) *this.amount;
+	
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
 	@Override

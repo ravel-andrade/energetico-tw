@@ -131,7 +131,7 @@ public class SaleFormController implements Initializable {
 		
 		obj.setAmount(Utils.tryParseToInt(txtAmount.getText()));
 		
-		obj.setTaxes(comboBoxProduct.getValue());
+		service.setTaxes(obj,comboBoxProduct.getValue());
 		
 		if (exception.getErrors().size() > 0) {
 			throw exception;
