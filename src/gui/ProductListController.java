@@ -149,7 +149,7 @@ public class ProductListController implements Initializable, DataChangeListener 
 		private void initRemoveButtons() {
 			tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 			tableColumnREMOVE.setCellFactory(param -> new TableCell<Product, Product>() {
-				private final Button button = new Button("remove");
+				private final Button button = new Button("Remover");
 
 				@Override
 				protected void updateItem(Product obj, boolean empty) {

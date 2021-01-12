@@ -131,7 +131,10 @@ public class ProductFormController implements Initializable {
 
 		txtName.setText(entity.getName());
 
-		txtValue.setText(String.valueOf(entity.getValue()));
+		if(entity.getValue() != null) {
+			txtValue.setText(String.valueOf(entity.getValue()));
+		}
+		
 	}
 
 	private void notifyDataChangeListeners() {

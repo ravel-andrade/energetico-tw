@@ -128,7 +128,7 @@ public class SaleListController implements Initializable, DataChangeListener {
 		controller.updateFormData();
 
 		Stage dialogStage = new Stage();
-		dialogStage.setTitle("Enter Sale data");
+		dialogStage.setTitle("Preencha os dados da venda");
 		dialogStage.setScene(new Scene(pane));
 		dialogStage.setResizable(false);
 		dialogStage.initOwner(parentStage);
@@ -147,7 +147,7 @@ public class SaleListController implements Initializable, DataChangeListener {
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<Sale, Sale>() {
-			private final Button button = new Button("edit");
+			private final Button button = new Button("Editar");
 
 			@Override
 			protected void updateItem(Sale obj, boolean empty) {
@@ -166,7 +166,7 @@ public class SaleListController implements Initializable, DataChangeListener {
 	private void initRemoveButtons() {
 		tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnREMOVE.setCellFactory(param -> new TableCell<Sale, Sale>() {
-			private final Button button = new Button("remove");
+			private final Button button = new Button("Remover");
 
 			@Override
 			protected void updateItem(Sale obj, boolean empty) {
