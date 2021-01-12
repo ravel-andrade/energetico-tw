@@ -2,13 +2,14 @@
 package model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 public class Sale implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	private Integer amount;
 	private String name;
 	private Double taxICMS;
 	private Double taxIPI;
@@ -22,13 +23,11 @@ public class Sale implements Serializable {
 	public Sale() {
 	}
 
-	public Sale(Integer id, String name, Product product) {
+	public Sale(Integer id, Integer amount, String name, Product product) {
 		this.id = id;
 		this.name = name;
-		this.taxICMS = product.getValue() * 0.18;
-		this.taxIPI = product.getValue() * 0.04;
-		this.taxPIS = product.getValue() * 0.0186;
-		this.taxCOFINS = product.getValue() * 0.0854;
+		this.amount = amount;
+		
 	}
 
 	public Integer getId() {
@@ -39,6 +38,14 @@ public class Sale implements Serializable {
 		this.id = id;
 	}
 
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -85,6 +92,7 @@ public class Sale implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+		
 	}
 
 	public Sale getSale() {
@@ -93,6 +101,14 @@ public class Sale implements Serializable {
 
 	public void setSale(Sale sale) {
 		Sale = sale;
+	}
+	
+	public void setTaxes(Product product) {
+		this.setProduct(product);
+		this.taxICMS = (product.getValue() * 0.18) *this.amount;
+		this.taxIPI = (product.getValue() * 0.04) *this.amount;
+		this.taxPIS = (product.getValue() * 0.0186) *this.amount;
+		this.taxCOFINS = (product.getValue() * 0.0854) *this.amount;
 	}
 
 	@Override
