@@ -5,7 +5,7 @@ import java.util.List;
 import model.dao.DaoFactory;
 import model.dao.SaleDao;
 import model.entities.*;
-import model.services.DiscountService;
+
 
 public class SaleService {
 

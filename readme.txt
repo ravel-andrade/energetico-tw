@@ -1,0 +1,2 @@
+- Fique atento para possiveis alterações necessárias no arquivo db.properties para alterar os dados de conexão com o banco de dados.
+- O sistema também necessita a implementação da validação para os campos de texto e afins.

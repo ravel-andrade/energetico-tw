@@ -2,11 +2,10 @@ package gui;
 
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -23,7 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -163,7 +162,6 @@ public class SaleFormController implements Initializable {
 		}
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getName());
-		System.out.println(entity.getAmount());
 		txtAmount.setText(String.valueOf(entity.getAmount()));
 		
 		if (entity.getProduct() == null) {
